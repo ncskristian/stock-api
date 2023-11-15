@@ -1,0 +1,94 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type GlobalQuoteResponse {
+  symbol: String!
+  open: String!
+  high: String!
+  low: String!
+  price: String!
+  volume: String!
+  latestTradingDay: String!
+  previousClose: String!
+  change: String!
+  changePercent: String!
+}
+
+type MarketStatusResponse {
+  marketType: String!
+  region: String!
+  primaryExchanges: String!
+  localOpen: String!
+  localClose: String!
+  currentStatus: String!
+  notes: String!
+}
+
+type TickerSearchResponse {
+  symbol: String!
+  name: String!
+  type: String!
+  region: String!
+  marketOpen: String!
+  marketClose: String!
+  timezone: String!
+  currency: String!
+  matchScore: String!
+}
+
+type TimeSeriesMetadata {
+  information: String!
+  symbol: String!
+  lastRefreshed: String!
+  outputSize: String
+  timeZone: String!
+}
+
+type EquityData {
+  open: Float!
+  hight: Float!
+  low: Float!
+  close: Float!
+  adjustedClose: Float
+  volume: Float!
+  dividendAmount: Float
+  splitCoefficient: Float
+  time: String!
+}
+
+type TimeSeriesDataResponse {
+  metadata: TimeSeriesMetadata!
+  series: [EquityData!]!
+}
+
+type Query {
+  getIntradayData(symbol: String!, interval: TimeSeriesInterval!, adjusted: Boolean, extendedHours: Boolean, month: String, outputSize: OutputSizes, dataType: DataTypes): TimeSeriesDataResponse!
+  getDailyData(symbol: String!, outputSize: OutputSizes!, dataType: DataTypes!): TimeSeriesDataResponse!
+  getDailyAdjustedData(symbol: String!, outputSize: OutputSizes!, dataType: DataTypes!): TimeSeriesDataResponse!
+  getWeeklyData(symbol: String!, dataType: DataTypes!): TimeSeriesDataResponse!
+  getWeeklyAdjustedData(symbol: String!, dataType: DataTypes!): TimeSeriesDataResponse!
+  getMonthlyData(symbol: String!, dataType: DataTypes!): TimeSeriesDataResponse!
+  getMonthlyAdjustedData(symbol: String!, dataType: DataTypes!): TimeSeriesDataResponse!
+  getGlobalQuote(symbol: String!, dataType: DataTypes!): GlobalQuoteResponse!
+  getMarketStatus: [MarketStatusResponse!]!
+  getTickerSearch(keywords: String!, dataType: DataTypes!): [TickerSearchResponse!]!
+}
+
+enum TimeSeriesInterval {
+  ONE_MINUTE
+  FIVE_MINUTES
+  FIFTEEN_MINUTES
+  THIRTY_MINUTES
+  ONE_HOUR
+}
+
+enum OutputSizes {
+  COMPACT
+  FULL
+}
+
+enum DataTypes {
+  JSON
+  CSV
+}
